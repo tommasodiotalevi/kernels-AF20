@@ -16,7 +16,7 @@ RUN echo "conda activate base" >> ~/.bashrc
 
 SHELL ["conda", "run", "-n", "base", "/bin/bash", "-c"]
 
-RUN conda install -c conda-forge -y python=3.11 root boost-cpp htcondor bokeh==3.1.0
+RUN conda install -c conda-forge -y python=3.11 root==6.30 boost-cpp htcondor bokeh==3.1.0
 
 ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
@@ -99,6 +99,8 @@ RUN make
 RUN make install
 
 #RUN python3 -m pip install git+https://gitlab.cern.ch/cp3-cms/CMSJMECalculators.git
+
+RUN 
 
 
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "base"]

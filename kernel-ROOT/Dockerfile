@@ -98,6 +98,22 @@ RUN cmake -DPython3_EXECUTABLE=/opt/conda/bin/python3 -DCMAKE_BUILD_TYPE=Release
 RUN make
 RUN make install
 
+RUN wget https://go.dev/dl/go1.23.3.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+
+RUN git clone https://github.com/dmwm/dasgoclient.git
+WORKDIR dasgoclient
+RUN go get github.com/dmwm/cmsauth
+RUN go get github.com/dmwm/das2go
+RUN go get github.com/vkuznet/x509proxy
+RUN go get github.com/buger/jsonparser
+RUN go get github.com/pkg/profile
+
+RUN make build_all
+
+RUN mv dasgoclient_amd64 /usr/local/go/bin/dasgoclient
+
 #RUN python3 -m pip install git+https://gitlab.cern.ch/cp3-cms/CMSJMECalculators.git
 
 

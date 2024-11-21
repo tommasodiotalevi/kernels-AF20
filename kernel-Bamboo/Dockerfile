@@ -26,7 +26,8 @@ RUN git clone -o upstream https://github.com/cp3-llbb/plotIt.git && \
     cmake -DCMAKE_INSTALL_PREFIX=$VIRTUAL_ENV ../plotIt && \
     make -j2 install && \
     cd -
-RUN pip install git+https://gitlab.cern.ch/cp3-cms/pyplotit.git
+
+RUN pip install git+https://gitlab.cern.ch/ttedesch/pyplotit.git@fix
 
 #RUN pip install bamboo-hep
 

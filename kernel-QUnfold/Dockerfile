@@ -1,4 +1,4 @@
-FROM ghcr.io/comp-dev-cms-ita/kernel-root
+FROM ghcr.io/comp-dev-cms-ita/kernel-root:v0.0.10-rc6
 
 USER root
 

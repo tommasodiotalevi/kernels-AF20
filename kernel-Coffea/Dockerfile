@@ -84,7 +84,7 @@ RUN python3 -m pip install coffea==0.7.22 \
                               hist \
                               pyaml \
                               requests \ 
-                              bokeh==2.4.2 \
+                              bokeh==3.1.0 \
                               parsl \
                               matplotlib>=3.7 \
                               rich \

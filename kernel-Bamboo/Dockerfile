@@ -1,5 +1,4 @@
-FROM ghcr.io/tommasodiotalevi/kernel-root
-#ghcr.io/comp-dev-cms-ita/kernel-root
+FROM ghcr.io/comp-dev-cms-ita/kernel-root
 
 WORKDIR /code
 

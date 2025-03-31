@@ -87,7 +87,7 @@ ENV CLING_STANDARD_PCH none
 RUN python3 -m pip install rucio-clients 
 
 #RUN python3 -m pip install correctionlib
-RUN conda install -y  correctionlib
+RUN conda install -c conda-forge -y correctionlib
 
 ENV correctionlib_DIR /opt/conda/lib/python3.11/site-packages/correctionlib/cmake/
 ENV CPATH /opt/conda/lib/python3.11/site-packages/correctionlib/include

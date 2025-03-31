@@ -19,7 +19,9 @@ RUN sed -i '152a\
 
 RUN python -m venv bambooenv
 RUN source bambooenv/bin/activate
-RUN pip install git+https://gitlab.cern.ch/ttedesch/bamboo.git@allow-spool
+RUN git clone -b allow-spool --single-branch https://gitlab.cern.ch/ttedesch/bamboo.git
+RUN sed -i 's/cmake_minimum_required( VERSION 2.8 )/cmake_minimum_required( VERSION 3.5 )/g' /code/bamboo/ext/CMakeLists.txt
+RUN pip install /code/bamboo/.
 RUN git clone -o upstream https://github.com/cp3-llbb/plotIt.git && \
     mkdir build-plotit && \ 
     cd build-plotit && \
@@ -28,6 +30,7 @@ RUN git clone -o upstream https://github.com/cp3-llbb/plotIt.git && \
     cd -
 
 RUN pip install git+https://gitlab.cern.ch/ttedesch/pyplotit.git@fix
+RUN rm -rf bamboo build-plotit plotIt
 
 #RUN pip install bamboo-hep
 

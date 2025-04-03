@@ -167,3 +167,35 @@ jobs:
             ghcr.io/${{ steps.get_repo_owner.outputs.repo_owner }}/kernel-pocketcoffea:latest
           file: ./kernel-PocketCoffea/Dockerfile
           platforms: linux/amd64
+
+  kernel-columnflow:
+    needs: kernel-Coffea
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Repo Owner
+        id: get_repo_owner
+        run: echo ::set-output name=repo_owner::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
+      - name: Build container kernel-columnflow
+        uses: docker/build-push-action@v2
+        with:
+          context: ./kernel-columnflow/
+          outputs: "type=registry,push=true"
+          tags: |
+            ghcr.io/${{ steps.get_repo_owner.outputs.repo_owner }}/kernel-columnflow:${{ env.RELEASE_VERSION }}
+            ghcr.io/${{ steps.get_repo_owner.outputs.repo_owner }}/kernel-columnflow:latest
+          file: ./kernel-columnflow/Dockerfile
+          platforms: linux/amd64  
